@@ -1,28 +1,33 @@
 from selenium.webdriver.common.by import By
 from behave import given, when, then
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
-
 from target_search_script import expected_text
 
 
-@given("Open target main page")
+@given("open target main page")
 def open_target_main(context):
     context.driver.get('https://www.target.com/')
 
 
-
+#
 @when('click sign in')
-def search_product(context):
+def click_sign_in(context):
     context.driver.find_element(By.CSS_SELECTOR, '.sc-43f80224-3.fBDEOp.h-margin-r-x3' ).click()
-    sleep(6)
-
+    #sleep(6)
+    context.driver.implicitly_wait(5)
 
 
 @when('From right side navigation menu,click sign in')
-def search_product(context):
-    context.driver.find_element(By.CSS_SELECTOR, "[ data-test='accountNav-signIn']").click()
-    sleep(6)
+def right_side_click_sign_in(context):
 
+    wait=WebDriverWait(context.driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "[data-test='accountNav-signIn']"))
+    )
+    wait.click()
+    #context.driver.find_element(By.CSS_SELECTOR, "[data-test='accountNav-signIn']").click()
+    #sleep(6)
 
 
 @then('verify sign in form opened')

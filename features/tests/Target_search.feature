@@ -10,7 +10,7 @@ Feature: Target search test cases
 
   Scenario: user can search for a product on Target
 
-      Given Open target main page
+      Given open target main page
       When click sign in
       And From right side navigation menu,click sign in
       Then verify sign in form opened
@@ -26,7 +26,7 @@ Feature: Target search test cases
   Scenario: user can add  any Target's product into cart
 
       Given Open target main page
-      When Search for "camera"
+      When Search for camera
       And Click on Add to cart
       And Click on Add to cart from side navigation
       And open the cart page
