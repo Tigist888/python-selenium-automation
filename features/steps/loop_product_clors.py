@@ -14,6 +14,7 @@ def open_product_page(context):
 @then('verify user can click through colors')
 def verify_color_selection(context):
     wait = WebDriverWait(context.driver, 10)
+
     # Find all color options
     color_options = wait.until(
         EC.presence_of_all_elements_located((By.XPATH, "//li[contains(@class, 'ndsCarouselItem')]")))
