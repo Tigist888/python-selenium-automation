@@ -1,36 +1,38 @@
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
-# from behave import given, when, then
-# from time import sleep
-#
-#
-# @given('launch target main page')
-# def open_target_main(context):
-#     context.driver.get('https://www.target.com/')
-#
-#
-# @when('Search for camera')
-# def search_camera(context):
-#   search_word='camera'
-#   context.driver.find_element(By.CSS_SELECTOR,'#search' ).send_keys( 'search_word')
-#
-#
-# @when('Click on Add to cart')
-# def click_add_to_cart(context):
-#     context.driver.find_element(By.CSS_SELECTOR, "[id*='addToCartButtonOrTextIdFor'] ").click()
-#
-#
-# @when('Click on Add to cart from side navigation')
-# def click_add_to_cart_from_side(context):
-#     context.driver.find_element(By.CSS_SELECTOR, "[id*='addToCartButtonOrTextIdFor' ] ").click()
-#
-# @when('open the cart page')
-# def open_cart_page(context):
-#     context.driver.find_element(By.CSS_SELECTOR,"[data-test='@web/CartIcon'] "  ).click()
-#
-#
-# @then( 'verify cart has one item')
-# def verify_cart_has_one_item(context):
-#     actual_result=context.driver.find_element(By.CSS_SELECTOR, "[data-test='cartItem-qty' ] ").text.strip()
-#     assert actual_result =="1", f"Expected 1, got {actual_result}"
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from behave import given, when, then
+from time import sleep
+
+
+@given('launch target main page')
+def open_target_main(context):
+    context.app.pages.MainPage.open_url()
+
+
+@when('Search for {search_word}')
+def search_product(context, search_word):
+  search_word='camera'
+  context.app.pages.header.search(search_word)
+
+
+
+@when('Click on Add to cart')
+def click_add_to_cart(context):
+    context.app.pages.Search_results_page.click_add_to_cart()
+
+
+@when('Click on Add to cart from side navigation')
+def click_add_to_cart_from_side(context):
+    context.app.pages.side_add_to_cart.click_add_to_cart()
+
+
+@when('open the cart page')
+def open_cart_page(context):
+    context.app.pages.header.click_add_to_cart()
+
+
+
+@then( 'verify cart has one item')
+def verify_cart_has_one_item(context):
+    context.app.pages.cart_page.verify_cart_has_one_item()
