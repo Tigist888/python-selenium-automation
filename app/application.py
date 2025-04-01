@@ -5,6 +5,7 @@ from pages.main_page import MainPage
 from pages.search_results_page import SearchResultsPage
 from pages.side_sign_in_page import SignInPage
 from pages.sign_in_opened_page import SignInOpenedPage
+from pages.login_email_password import LoginEmailPassword
 
 
 class Application:
@@ -18,3 +19,6 @@ class Application:
         self.cart_page = CartPage(driver)
         self.click_sign_in= SignInPage(driver)
         self.sign_in_opened= SignInOpenedPage(driver)
+        self.login_email_password=LoginEmailPassword(driver)
+
+        ##self.filename.py=classname(driver)
