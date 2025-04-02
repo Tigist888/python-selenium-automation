@@ -6,6 +6,7 @@ from pages.search_results_page import SearchResultsPage
 from pages.side_sign_in_page import SignInPage
 from pages.sign_in_opened_page import SignInOpenedPage
 from pages.login_email_password import LoginEmailPassword
+from pages.target_app_page import TargetAppPage
 
 
 class Application:
@@ -20,5 +21,6 @@ class Application:
         self.click_sign_in= SignInPage(driver)
         self.sign_in_opened= SignInOpenedPage(driver)
         self.login_email_password=LoginEmailPassword(driver)
+        self.target_app_page = TargetAppPage(driver)
 
         ##self.filename.py=classname(driver)

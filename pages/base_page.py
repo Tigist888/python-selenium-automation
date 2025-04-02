@@ -32,3 +32,53 @@ class Page:
         current_url = self.driver.current_url
         print(f'current url {current_url}')
         assert expected_partial_url in current_url,f'expected text {expected_partial_url} but found {current_url}'
+
+    def wait_until_clickable_click(self, *locator):
+        self.wait.until(
+            EC.element_to_be_clickable(locator),
+            message=f'Element not clickable by {locator}'
+        ).click()
+
+    def wait_until_visible(self, *locator):
+        self.wait.until(
+            EC.visibility_of_element_located(locator),
+            message=f'Element not visible by {locator}'
+        )
+
+    def wait_until_invisible(self, *locator):
+        self.wait.until(
+            EC.invisibility_of_element_located(locator),
+            message=f'Element still visible by {locator}'
+        )
+
+    def get_current_window_handle(self):
+        return self.driver.current_window_handle
+
+    def switch_to_new_window(self):
+        self.wait.until(EC.new_window_is_opened)
+        all_windows = self.driver.window_handles
+        print('Current windows ', all_windows)
+        print('Switching to window: ', all_windows[1])
+        self.driver.switch_to.window(all_windows[1])
+
+    def switch_to_window_by_id(self, window_id):
+        print('Switching to window: ', window_id)
+        self.driver.switch_to.window(window_id)
+
+    def verify_url(self, expected_url):
+        # current_url = self.driver.current_url
+        # print(f'Current url {current_url}')
+        # assert expected_url == current_url, f'Expected URL {expected_url}, but got {current_url}'
+        self.wait.until(EC.url_to_be(expected_url), message=f'URL does not match {expected_url}')
+
+    # current_url = self.driver.current_url
+    # print(f'Current url {current_url}')
+    # assert expected_partial_url in current_url, f'Expected text {expected_partial_url} not in {current_url}'
+    def verify_partial_url(self, expected_partial_url):
+
+       self.wait.until(EC.url_contains(expected_partial_url), message=f'URL does not contain {expected_partial_url}')
+
+
+    def close(self):
+       self.driver.close()
+
